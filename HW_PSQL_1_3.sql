@@ -67,3 +67,5 @@ database_skypro1=# CREATE TABLE employee(
         1 | Elena      | Nikolaeva | women  |  41
         3 | Aleksandra | Ivanova   | women  |  63
     (2 строки)
+
+            -----   КОНЕЦ   -----
