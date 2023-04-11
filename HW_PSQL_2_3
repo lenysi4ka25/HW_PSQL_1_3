@@ -1,0 +1,125 @@
+
+                Задание 1
+
+        пункт 1. "Доведите количество записей в таблице до 5."
+
+database_skypro1=# INSERT INTO employee (
+database_skypro1(# first_name, last_name, gender, age)
+database_skypro1-# VALUES ('Serg', 'Afanasiev', 'men', 55);
+INSERT 0 1
+database_skypro1=# INSERT INTO employee (
+database_skypro1(# first_name, last_name, gender, age)
+database_skypro1-# VALUES ('Viktor', 'Sidorov', 'men', 33);
+INSERT 0 1
+database_skypro1=# INSERT INTO employee (
+database_skypro1(# first_name, last_name, gender, age)
+database_skypro1-# VALUES ('Maria', 'Pavlova', 'women', 29);
+INSERT 0 1
+database_skypro1=# SELECT * FROM employee;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  1 | Elena      | Nikolaeva | women  |  41
+  3 | Aleksandra | Ivanova   | women  |  63
+  4 | Serg       | Afanasiev | men    |  55
+  5 | Viktor     | Sidorov   | men    |  33
+  6 | Maria      | Pavlova   | women  |  29
+
+        пункт 2. "Получите информацию об именах и фамилиях по всем сотрудникам. Колонки должны называться «Имя» и «Фамилия»."
+
+database_skypro1=# SELECT first_name AS Имя, last_name AS Фамилия
+database_skypro1-# FROM employee;
+    Имя     |  Фамилия
+------------+-----------
+ Elena      | Nikolaeva
+ Aleksandra | Ivanova
+ Serg       | Afanasiev
+ Viktor     | Sidorov
+ Maria      | Pavlova
+
+        пункт 3. "Получите всю информацию о сотрудниках, которые младше 30 или старше 50 лет."
+
+database_skypro1=# SELECT * FROM employee
+database_skypro1-# WHERE age < 30 OR age > 50;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  3 | Aleksandra | Ivanova   | women  |  63
+  4 | Serg       | Afanasiev | men    |  55
+  6 | Maria      | Pavlova   | women  |  29
+
+        пункт 4. "Получите всю информацию о сотрудниках, которым от 30 до 50 лет."
+
+database_skypro1=# SELECT * FROM employee
+database_skypro1-# WHERE age > 30 AND age < 50;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  1 | Elena      | Nikolaeva | women  |  41
+  5 | Viktor     | Sidorov   | men    |  33
+
+        пункт 5. "Выведите полный список сотрудников, которые отсортированы по фамилиям в обратном порядке."
+
+database_skypro1=# SELECT * FROM employee
+database_skypro1-# ORDER BY last_name DESC;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  5 | Viktor     | Sidorov   | men    |  33
+  6 | Maria      | Pavlova   | women  |  29
+  1 | Elena      | Nikolaeva | women  |  41
+  3 | Aleksandra | Ivanova   | women  |  63
+  4 | Serg       | Afanasiev | men    |  55
+
+        пункт 6. "Выведите сотрудников, имена которых длиннее 4 символов."
+
+database_skypro1=# SELECT * FROM employee
+database_skypro1-# WHERE first_name LIKE '%_____%';
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  1 | Elena      | Nikolaeva | women  |  41
+  3 | Aleksandra | Ivanova   | women  |  63
+  5 | Viktor     | Sidorov   | men    |  33
+  6 | Maria      | Pavlova   | women  |  29
+
+
+                Задание 2
+
+        пункт 1. "Измените имена у двух сотрудников так, чтобы на 5 сотрудников было только 3 разных имени,
+                  то есть чтобы получились две пары тезок и один сотрудник с уникальным именем."
+
+database_skypro1=# UPDATE employee SET first_name = 'Elena', last_name = 'Nikolaeva', gender = 'women', age = 41
+database_skypro1-# WHERE id = 3;
+UPDATE 1
+database_skypro1=# UPDATE employee SET first_name = 'Serg', last_name = 'Afanasiev', gender = 'men', age = 55
+database_skypro1-# WHERE id = 5;
+UPDATE 1
+database_skypro1=# SELECT * FROM employee;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  1 | Elena      | Nikolaeva | women  |  41
+  4 | Serg       | Afanasiev | men    |  55
+  6 | Maria      | Pavlova   | women  |  29
+  3 | Elena      | Nikolaeva | women  |  41
+  5 | Serg       | Afanasiev | men    |  55
+
+        пункт 2. "Посчитайте суммарный возраст для каждого имени. Выведите в двух столбцах «имя» и «суммарный возраст»."
+
+database_skypro1=# SELECT first_name AS Имя, SUM (age) AS Суммарный_возраст
+database_skypro1-# FROM employee
+database_skypro1-# GROUP BY Имя;
+  Имя  | Суммарный_возраст
+-------+-------------------
+ Serg  |               110
+ Maria |                29
+ Elena |                82
+
+        пункт 3. "Выведите имя и самый юный возраст, соответствующий имени."
+
+database_skypro1=# SELECT * FROM employee
+database_skypro1-# WHERE age = (
+database_skypro1(# SELECT MIN(age)
+database_skypro1(# FROM employee
+database_skypro1(# );
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  6 | Maria      | Pavlova   | women  |  29
+
+        пункт 4. "Выведите имя и максимальный возраст только для неуникальных имен. Результат отсортируйте по возрасту в порядке возрастания."
+
