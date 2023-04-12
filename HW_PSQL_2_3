@@ -112,14 +112,29 @@ database_skypro1-# GROUP BY Имя;
 
         пункт 3. "Выведите имя и самый юный возраст, соответствующий имени."
 
-database_skypro1=# SELECT * FROM employee
-database_skypro1-# WHERE age = (
-database_skypro1(# SELECT MIN(age)
-database_skypro1(# FROM employee
-database_skypro1(# );
- id | first_name | last_name | gender | age
-----+------------+-----------+--------+-----
-  6 | Maria      | Pavlova   | women  |  29
+database_skypro1=# SELECT first_name AS Имя, age AS Самый_юный_возраст
+database_skypro1-# FROM employee
+database_skypro1-# WHERE age = (SELECT MIN (age) FROM employee);
+  Имя  | Самый_юный_возраст
+-------+--------------------
+ Maria |                 29
 
         пункт 4. "Выведите имя и максимальный возраст только для неуникальных имен. Результат отсортируйте по возрасту в порядке возрастания."
+
+database_skypro1=# SELECT first_name, age
+database_skypro1-# FROM employee
+database_skypro1-# WHERE age IN (SELECT MAX (age) FROM employee
+database_skypro1(# GROUP BY first_name HAVING COUNT (first_name) > 1)
+database_skypro1-# ORDER BY 2;
+ first_name | age
+------------+-----
+ Elena      |  41
+ Elena      |  41
+ Serg       |  55
+ Serg       |  55
+
+
+
+
+
 
