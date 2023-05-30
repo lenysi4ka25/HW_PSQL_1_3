@@ -1,0 +1,42 @@
+
+                    Задание 1.
+
+         пункт 1. "Создайте таблицу city с колонками city_id и city_name."
+
+ database_skypro1=# CREATE TABLE city (city_id BIGSERIAL NOT NULL PRIMARY KEY,
+ database_skypro1(# city_name VARCHAR (120) NOT NULL
+ database_skypro1(# );
+ CREATE TABLE
+ database_skypro1=# SELECT * FROM city;
+  city_id | city_name
+
+        пункт 2. "Добавьте в таблицу employee колонку city_id."
+
+  database_skypro1=# ALTER TABLE employee ADD city_id INT;
+  ALTER TABLE
+  database_skypro1=# SELECT * FROM employee;
+   id | first_name | last_name | gender | age | city_id
+  ----+------------+-----------+--------+-----+---------
+    1 | Elena      | Nikolaeva | women  |  41 |
+    4 | Serg       | Afanasiev | men    |  55 |
+    6 | Maria      | Pavlova   | women  |  29 |
+    3 | Elena      | Nikolaeva | women  |  41 |
+    5 | Serg       | Afanasiev | men    |  55 |
+
+
+        пункт 3. "Назначьте эту колонку внешним ключом. Свяжите таблицу employee с таблицей city."
+
+  database_skypro1=# ALTER TABLE employee ADD CONSTRAINT city_id FOREIGN KEY(city_id) REFERENCES city(city_id);
+  ALTER TABLE
+  database_skypro1=# SELECT * FROM employee;
+   id | first_name | last_name | gender | age | city_id
+  ----+------------+-----------+--------+-----+---------
+    1 | Elena      | Nikolaeva | women  |  41 |
+    4 | Serg       | Afanasiev | men    |  55 |
+    6 | Maria      | Pavlova   | women  |  29 |
+    3 | Elena      | Nikolaeva | women  |  41 |
+    5 | Serg       | Afanasiev | men    |  55 |
+
+        пункт 4. "Заполните таблицу city и назначьте работникам соответствующие города."
+
+
