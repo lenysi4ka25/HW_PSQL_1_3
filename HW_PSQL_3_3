@@ -136,4 +136,11 @@
       Serg       | Сочи
       Maria      | Санкт-Петербург
 
-        пункт 5. ""
+        пункт 5. "Получите имена городов, в которых никто не живет."
+
+      database_skypro1=# SELECT city_name FROM city
+      database_skypro1-# LEFT JOIN employee ON city.city_id=employee.city_id
+      database_skypro1-# WHERE employee.first_name is NULL;
+       city_name
+      -----------
+       Самара
