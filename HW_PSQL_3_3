@@ -124,4 +124,16 @@
      Serg       | Сочи
      Maria      |
 
-        пункт 4. ""
+        пункт 4. "Получите таблицу, в которой каждому имени должен соответствовать каждый город."
+
+     database_skypro1=# SELECT first_name, city_name FROM employee
+     database_skypro1-# INNER JOIN city ON employee.city_id=city.city_id;
+      first_name |    city_name
+     ------------+-----------------
+      Elena      | Санкт-Петербург
+      Elena      | Минск
+      Serg       | Хабаровск
+      Serg       | Сочи
+      Maria      | Санкт-Петербург
+
+        пункт 5. ""
