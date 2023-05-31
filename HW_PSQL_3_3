@@ -107,3 +107,21 @@
     Serg       | Afanasiev | Сочи
     Maria      | Pavlova   | Санкт-Петербург
                |           | Самара
+
+
+        пункт 3. "Получите имена всех сотрудников и названия всех городов.
+        Если в городе не живет никто из сотрудников, то вместо имени должен стоять null.
+        Аналогично, если города для какого-то из сотрудников нет в списке, должен быть получен null"
+
+    database_skypro1=# SELECT first_name, city_name FROM city
+    database_skypro1-# FULL OUTER JOIN employee ON city.city_id=employee.id;
+     first_name |    city_name
+    ------------+-----------------
+     Elena      | Санкт-Петербург
+                | Минск
+     Elena      | Самара
+     Serg       | Хабаровск
+     Serg       | Сочи
+     Maria      |
+
+        пункт 4. ""
